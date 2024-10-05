@@ -16,14 +16,18 @@ class User:
 class BankUser(User):
     def __init__(self, name, pin, password, balance=0):
         super().__init__(name, pin, password)
-        self.balance = balance
+        self.balance = float(balance)
 
+    def show_balance(self):
+        print(f"{self.name} has and account balance of: ${self.balance}")
 
+    def withdraw(self, amount):
+        self.balance -= amount
+        return self.balance
 
-
-
-
-
+    def deposit(self, amount):
+        self.balance += amount
+        return self.balance
 
 
 # Driver Code for Task 1 
@@ -37,6 +41,14 @@ class BankUser(User):
 # print(user.name, user.pin, user.password)
 
 # Driver Code for Task 3
-bank_user = BankUser("Bob", 1234, "password", 0)
-print(bank_user.name, bank_user.pin, bank_user.password, bank_user.balance)
+# bank_user = BankUser("Bob", 1234, "password", 0)
+# print(bank_user.name, bank_user.pin, bank_user.password, bank_user.balance)
 
+# Driver Code for Task 4
+
+bank_user = BankUser("Bob", 1234, "password", 0)
+bank_user.show_balance()
+bank_user.deposit(1000)
+bank_user.show_balance()
+bank_user.withdraw(500)
+bank_user.show_balance()
