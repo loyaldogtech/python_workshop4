@@ -17,17 +17,16 @@ class BankUser(User):
     def __init__(self, name, pin, password, balance=0):
         super().__init__(name, pin, password)
         self.balance = float(balance)
-
+    
     def show_balance(self):
         print(f"{self.name} has and account balance of: ${self.balance}")
-
+    
     def withdraw(self, amount):
         self.balance -= amount
         return self.balance
 
     def deposit(self, amount):
         self.balance += amount
-        return self.balance
     
     def transfer_money(self, amount, to_user, pin):
         print(f"\nYou are transferring ${amount} to {to_user.name}")
@@ -68,46 +67,30 @@ class BankUser(User):
     def show_balance(self):
         print(f"{self.name} has an account balance of: {self.balance}")
 
-# Driver Code for Task 1 
-# user = User("Bob", 1234, "password")
-# print(user.name, user.pin, user.password)
-
-# # Driver Code for Task 2
-# user.change_name("Rob")
-# user.change_pin(4321)
-# user.change_password("rob1234")
-# print(user.name, user.pin, user.password)
-
-# Driver Code for Task 3
-# bank_user = BankUser("Bob", 1234, "password", 0)
-# print(bank_user.name, bank_user.pin, bank_user.password, bank_user.balance)
-
-# Driver Code for Task 4
-
-# bank_user = BankUser("Bob", 1234, "password", 0)
-# bank_user.show_balance()
-# bank_user.deposit(1000)
-# bank_user.show_balance()
-# bank_user.withdraw(500)
-# bank_user.show_balance()
-
-# Driver Code for Task 5
+# Instantiate the first BankUser
 user1 = BankUser("Alice", "1234", "alicepassword")
 
+# Instantiate the second BankUser
 user2 = BankUser("Bob", "5678", "bobpassword")
 
+# Deposit $5000 into Alice's account
 user1.deposit(5000)
 
+# Deposit $900 into Bob's account
 user2.deposit(900)
 
+# Show balance of both users
 user1.show_balance()
 user2.show_balance()
 
+# Bob transfers $500 to Alice using the correct PIN
 if user2.transfer_money(500, user1, "5678"):
     user1.show_balance()
     user2.show_balance()
 
+# Alice requests $250 from Bob
 user1.request_money(user2, 250)
 
+# Show final balances
 user1.show_balance()
 user2.show_balance()
